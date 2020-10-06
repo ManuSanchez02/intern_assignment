@@ -12,12 +12,15 @@ class _HomeState extends State<Home> {
     ColorScreen(Colors.indigo),
     ColorScreen(Colors.redAccent),
     ColorScreen(Colors.amber),
+    ColorScreen(Colors.pinkAccent),
+    ColorScreen(Colors.green),
   ];
 
   void onTabTapped(int index) {
     setState(() {
       _currentIndex = index;
     });
+
   }
 
   @override
@@ -30,15 +33,23 @@ class _HomeState extends State<Home> {
           showUnselectedLabels: false,
           selectedItemColor: Colors.white,
           unselectedItemColor: Colors.black,
+          type: BottomNavigationBarType.shifting,
           items: [
-            BottomNavigationBarItem(
-              icon: new Icon(Icons.home),
-              title: new Text('Home'),
-              backgroundColor: Colors.black
+            new BottomNavigationBarItem(
+              icon: Icon(Icons.home),
+              title: Text('Home'),
             ),
             BottomNavigationBarItem(
-              icon: new Icon(Icons.mail),
-              title: new Text('Messages'),
+              icon: Icon(Icons.store),
+              title: Text('Store'),
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.add),
+              title: Text(""),
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.explore),
+              title: Text('Explore'),
             ),
             BottomNavigationBarItem(
                 icon: Icon(Icons.person), title: Text('Profile'))
