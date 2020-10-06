@@ -1,34 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:intern_assignment/screens/home.dart';
 
-void main() {
-  runApp(MaterialApp(
-    home: Home(),
-  ));
-}
 
-class Home extends StatefulWidget {
-  @override
-  _HomeState createState() => _HomeState();
-}
+void main() => runApp(App());
 
-class _HomeState extends State<Home> {
+
+class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      bottomNavigationBar: BottomNavigationBar(currentIndex: 0,
-          items: [
-            BottomNavigationBarItem(
-              icon: new Icon(Icons.home),
-              title: new Text('Home'),
-        ),
-            BottomNavigationBarItem(
-              icon: new Icon(Icons.mail),
-              title: new Text('Messages'),
-        ),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.person),
-                title: Text('Profile'))
-      ]),
+    return MaterialApp(
+      title: 'My Flutter App',
+      home: Home(),
     );
   }
 }
