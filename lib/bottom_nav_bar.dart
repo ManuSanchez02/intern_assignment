@@ -33,13 +33,12 @@ class _BottomNavBarState extends State<BottomNavBar> {
 
 
   void tapHandler(index, key) async {
-    setState(() {
+    await setState(() {
       _currentIndex = index;
       _indicatorWidth = getSize(key).width;
       _indicatorHeight = getSize(key).height;
       _indicatorPosition = getPosition(key).dx;
     });
-
     widget.changeScreen(index);
   }
 
