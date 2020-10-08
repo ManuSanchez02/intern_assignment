@@ -14,7 +14,6 @@ class BottomNavBarItem extends StatelessWidget {
   Widget build(BuildContext context) {
     GlobalKey key = GlobalKey();
     print('rebuilt $index');
-
     return Container(
         child: GestureDetector(
       onTap: () => tapHandler(index, key),

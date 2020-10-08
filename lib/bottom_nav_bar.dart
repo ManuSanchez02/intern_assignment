@@ -17,23 +17,20 @@ class _BottomNavBarState extends State<BottomNavBar> {
   double _indicatorWidth;
   double _indicatorPosition;
 
-  Size getSize(key){
-    final RenderBox renderBoxTab =
-    key.currentContext.findRenderObject();
+  Size getSize(key) {
+    final RenderBox renderBoxTab = key.currentContext.findRenderObject();
     final tabSize = renderBoxTab.size;
     return tabSize;
   }
 
   Offset getPosition(key) {
-    final RenderBox renderBoxTab =
-    key.currentContext.findRenderObject();
+    final RenderBox renderBoxTab = key.currentContext.findRenderObject();
     final tabPosition = renderBoxTab.localToGlobal(Offset.zero);
     return tabPosition;
   }
 
-
-  void tapHandler(index, key) async {
-    await setState(() {
+  void tapHandler(index, key) {
+    setState(() {
       _currentIndex = index;
       _indicatorWidth = getSize(key).width;
       _indicatorHeight = getSize(key).height;
@@ -51,16 +48,18 @@ class _BottomNavBarState extends State<BottomNavBar> {
     return Container(
       height: kBottomNavigationBarHeight,
       alignment: Alignment.center,
-      child: Stack(children: [
+      child: Stack(fit: StackFit.expand, children: [
         AnimatedPositioned(
           duration: Duration(milliseconds: 500),
           curve: Curves.easeOutCirc,
-          left: _indicatorPosition,
+          left: _indicatorPosition - 8,
+          top: 8,
           child: SizedBox(
-            height: _indicatorHeight,
-            width: _indicatorWidth,
+            height: _indicatorHeight + 22,
+            width: _indicatorWidth + 16,
             child: DecoratedBox(
-              decoration: BoxDecoration(color: Colors.blue),
+              decoration: BoxDecoration(
+                  color: Colors.black, borderRadius: BorderRadius.circular(4)),
             ),
           ),
         ),
