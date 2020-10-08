@@ -6,19 +6,19 @@ class BottomNavBarItem extends StatelessWidget {
   final int index;
   final showCondition;
   final tapHandler;
+  final GlobalKey wrapKey;
 
   BottomNavBarItem(
-      {this.icon, this.text, this.index, this.showCondition, this.tapHandler});
+      {this.icon, this.text, this.index, this.showCondition, this.tapHandler, this.wrapKey});
 
   @override
   Widget build(BuildContext context) {
-    GlobalKey key = GlobalKey();
-    print('rebuilt $index');
+    print('rebuilt $wrapKey');
     return Container(
         child: GestureDetector(
-      onTap: () => tapHandler(index, key),
+      onTap: () => tapHandler(index, wrapKey),
       child: Wrap(
-        key: key,
+        key: wrapKey,
         crossAxisAlignment: WrapCrossAlignment.center,
         children: showCondition(index)
             ? [

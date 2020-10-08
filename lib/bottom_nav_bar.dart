@@ -16,6 +16,11 @@ class _BottomNavBarState extends State<BottomNavBar> {
   double _indicatorHeight;
   double _indicatorWidth;
   double _indicatorPosition;
+  final List<GlobalKey> keys = [
+    GlobalKey(),
+    GlobalKey(),
+    GlobalKey(),
+  ];
 
   Size getSize(key) {
     final RenderBox renderBoxTab = key.currentContext.findRenderObject();
@@ -32,9 +37,13 @@ class _BottomNavBarState extends State<BottomNavBar> {
   void tapHandler(index, key) {
     setState(() {
       _currentIndex = index;
-      _indicatorWidth = getSize(key).width;
-      _indicatorHeight = getSize(key).height;
-      _indicatorPosition = getPosition(key).dx;
+    });
+    Future.delayed(Duration(milliseconds: 20),() {
+      setState(() {
+        _indicatorWidth = getSize(key).width + 16;
+        _indicatorHeight = getSize(key).height + 22;
+        _indicatorPosition = getPosition(key).dx - 8;
+      });
     });
     widget.changeScreen(index);
   }
@@ -52,11 +61,11 @@ class _BottomNavBarState extends State<BottomNavBar> {
         AnimatedPositioned(
           duration: Duration(milliseconds: 500),
           curve: Curves.easeOutCirc,
-          left: _indicatorPosition - 8,
+          left: _indicatorPosition,
           top: 8,
           child: SizedBox(
-            height: _indicatorHeight + 22,
-            width: _indicatorWidth + 16,
+            height: _indicatorHeight,
+            width: _indicatorWidth,
             child: DecoratedBox(
               decoration: BoxDecoration(
                   color: Colors.black, borderRadius: BorderRadius.circular(4)),
@@ -72,6 +81,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
               index: 0,
               showCondition: checkIndex,
               tapHandler: tapHandler,
+              wrapKey: keys[0],
             ),
             BottomNavBarItem(
               icon: Icons.add,
@@ -79,6 +89,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
               index: 1,
               showCondition: checkIndex,
               tapHandler: tapHandler,
+              wrapKey: keys[1]
             ),
             BottomNavBarItem(
               icon: Icons.explore,
@@ -86,6 +97,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
               index: 2,
               showCondition: checkIndex,
               tapHandler: tapHandler,
+              wrapKey: keys[2],
             ),
           ],
         ),
