@@ -14,9 +14,7 @@ class BottomNavBarItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     GlobalKey key = GlobalKey();
-
-
-
+    
 
     return Container(
       child: showCondition(index)

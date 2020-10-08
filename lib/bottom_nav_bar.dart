@@ -24,13 +24,20 @@ class _BottomNavBarState extends State<BottomNavBar> {
     return tabSize;
   }
 
+  Offset getPosition(key) {
+    final RenderBox renderBoxTab =
+    key.currentContext.findRenderObject();
+    final tabPosition = renderBoxTab.localToGlobal(Offset.zero);
+    return tabPosition;
+  }
+
+
   void tapHandler(index, key) async {
-    await setState(() {
-      _currentIndex = index;
-    });
     setState(() {
-     // _indicatorWidth = getSize(key).width;
-      print(_indicatorWidth);
+      _currentIndex = index;
+      _indicatorWidth = getSize(key).width;
+      _indicatorHeight = getSize(key).height;
+      _indicatorPosition = getPosition(key).dx;
     });
 
     widget.changeScreen(index);
@@ -47,7 +54,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
       alignment: Alignment.center,
       child: Stack(children: [
         SizedBox(
-          height: 10,
+          height: _indicatorHeight,
           width: _indicatorWidth,
           child: DecoratedBox(
             decoration: BoxDecoration(color: Colors.red),
