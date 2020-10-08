@@ -14,7 +14,7 @@ class BottomNavBarItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     GlobalKey key = GlobalKey();
-    
+
 
     return Container(
       child: showCondition(index)
@@ -22,8 +22,8 @@ class BottomNavBarItem extends StatelessWidget {
         key: key,
         crossAxisAlignment: WrapCrossAlignment.center,
         children: [
-          Icon(icon),
-          Text(text),
+          Icon(icon, color: Colors.red,),
+          Text(text, style: TextStyle(color: Colors.red),),
         ],
       )
           : GestureDetector(
@@ -32,7 +32,7 @@ class BottomNavBarItem extends StatelessWidget {
           key: key,
           crossAxisAlignment: WrapCrossAlignment.center,
           children: [
-            Icon(icon),
+            Icon(icon, color: Colors.black,),
           ],
         ),
       ),

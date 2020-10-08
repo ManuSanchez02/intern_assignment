@@ -53,11 +53,16 @@ class _BottomNavBarState extends State<BottomNavBar> {
       height: kBottomNavigationBarHeight,
       alignment: Alignment.center,
       child: Stack(children: [
-        SizedBox(
-          height: _indicatorHeight,
-          width: _indicatorWidth,
-          child: DecoratedBox(
-            decoration: BoxDecoration(color: Colors.red),
+        AnimatedPositioned(
+          duration: Duration(seconds: 2),
+          curve: Curves.easeOutCirc,
+          left: _indicatorPosition,
+          child: SizedBox(
+            height: _indicatorHeight,
+            width: _indicatorWidth,
+            child: DecoratedBox(
+              decoration: BoxDecoration(color: Colors.blue),
+            ),
           ),
         ),
         Row(
