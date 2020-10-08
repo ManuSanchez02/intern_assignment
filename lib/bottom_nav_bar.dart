@@ -54,7 +54,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
       alignment: Alignment.center,
       child: Stack(children: [
         AnimatedPositioned(
-          duration: Duration(seconds: 2),
+          duration: Duration(milliseconds: 500),
           curve: Curves.easeOutCirc,
           left: _indicatorPosition,
           child: SizedBox(
