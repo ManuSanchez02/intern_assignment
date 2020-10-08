@@ -7,13 +7,45 @@ class BottomNavBarItem extends StatelessWidget {
   final showCondition;
   final tapHandler;
   final GlobalKey wrapKey;
+  final indicatorUpdater;
 
   BottomNavBarItem(
-      {this.icon, this.text, this.index, this.showCondition, this.tapHandler, this.wrapKey});
+      {this.icon,
+      this.text,
+      this.index,
+      this.showCondition,
+      this.tapHandler,
+      this.wrapKey,
+        this.indicatorUpdater
+      });
 
   @override
   Widget build(BuildContext context) {
-    print('rebuilt $wrapKey');
+    //print('rebuilt $wrapKey');
+
+    Offset indicatorPosition;
+    Size indicatorSize;
+
+    Size getSize(key) {
+      final RenderBox renderBoxTab = key.currentContext.findRenderObject();
+      final tabSize = renderBoxTab.size;
+      return tabSize;
+    }
+
+    Offset getPosition(key) {
+      final RenderBox renderBoxTab = key.currentContext.findRenderObject();
+      final tabPosition = renderBoxTab.localToGlobal(Offset.zero);
+      return tabPosition;
+    }
+
+    if (showCondition(index)) {
+      WidgetsBinding.instance.addPostFrameCallback((_) => {
+            indicatorPosition = getPosition(wrapKey),
+            indicatorSize = getSize(wrapKey),
+            indicatorUpdater(indicatorSize, indicatorPosition)
+          });
+    }
+
     return Container(
         child: GestureDetector(
       onTap: () => tapHandler(index, wrapKey),
@@ -24,18 +56,18 @@ class BottomNavBarItem extends StatelessWidget {
             ? [
                 Icon(
                   icon,
-                  color: Colors.red,
+                  color: Colors.white,
                   size: 20,
                 ),
                 Text(
                   text,
-                  style: TextStyle(color: Colors.red, fontSize: 17),
+                  style: TextStyle(color: Colors.white, fontSize: 17),
                 ),
               ]
             : [
                 Icon(
                   icon,
-                  color: Colors.red,
+                  color: Colors.black,
                   size: 20,
                 )
               ],

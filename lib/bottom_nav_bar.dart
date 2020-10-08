@@ -20,6 +20,8 @@ class _BottomNavBarState extends State<BottomNavBar> {
     GlobalKey(),
     GlobalKey(),
     GlobalKey(),
+    GlobalKey(),
+    GlobalKey(),
   ];
 
   Size getSize(key) {
@@ -34,17 +36,34 @@ class _BottomNavBarState extends State<BottomNavBar> {
     return tabPosition;
   }
 
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) => {
+          updateIndicator(
+              getSize(keys[_currentIndex]), getPosition(keys[_currentIndex]))
+        });
+  }
+
+  void updateIndicator(size, pos) {
+    setState(() {
+      _indicatorWidth = size.width + 16;
+      _indicatorHeight = size.height + 22;
+      _indicatorPosition = pos.dx - 8;
+    });
+  }
+
   void tapHandler(index, key) {
     setState(() {
       _currentIndex = index;
     });
-    Future.delayed(Duration(milliseconds: 20),() {
+    /*Future.delayed(Duration(milliseconds: 20), () {
       setState(() {
         _indicatorWidth = getSize(key).width + 16;
         _indicatorHeight = getSize(key).height + 22;
         _indicatorPosition = getPosition(key).dx - 8;
       });
-    });
+    });*/
     widget.changeScreen(index);
   }
 
@@ -54,12 +73,18 @@ class _BottomNavBarState extends State<BottomNavBar> {
 
   @override
   Widget build(BuildContext context) {
+    WidgetsBinding.instance.addPostFrameCallback((_) => {
+          _indicatorPosition = getPosition(keys[_currentIndex]).dx - 8,
+          _indicatorWidth = getSize(keys[_currentIndex]).width + 16,
+          _indicatorHeight = getSize(keys[_currentIndex]).height + 22,
+        });
+
     return Container(
       height: kBottomNavigationBarHeight,
       alignment: Alignment.center,
       child: Stack(fit: StackFit.expand, children: [
         AnimatedPositioned(
-          duration: Duration(milliseconds: 500),
+          duration: Duration(milliseconds: 250),
           curve: Curves.easeOutCirc,
           left: _indicatorPosition,
           top: 8,
@@ -82,22 +107,43 @@ class _BottomNavBarState extends State<BottomNavBar> {
               showCondition: checkIndex,
               tapHandler: tapHandler,
               wrapKey: keys[0],
+              indicatorUpdater: updateIndicator,
+            ),
+            BottomNavBarItem(
+              icon: Icons.store,
+              text: "Store",
+              index: 1,
+              showCondition: checkIndex,
+              tapHandler: tapHandler,
+              wrapKey: keys[1],
+              indicatorUpdater: updateIndicator,
             ),
             BottomNavBarItem(
               icon: Icons.add,
               text: "",
-              index: 1,
-              showCondition: checkIndex,
-              tapHandler: tapHandler,
-              wrapKey: keys[1]
-            ),
-            BottomNavBarItem(
-              icon: Icons.explore,
-              text: "Explore",
               index: 2,
               showCondition: checkIndex,
               tapHandler: tapHandler,
               wrapKey: keys[2],
+              indicatorUpdater: updateIndicator,
+            ),
+            BottomNavBarItem(
+              icon: Icons.explore,
+              text: "Explore",
+              index: 3,
+              showCondition: checkIndex,
+              tapHandler: tapHandler,
+              wrapKey: keys[3],
+              indicatorUpdater: updateIndicator,
+            ),
+            BottomNavBarItem(
+              icon: Icons.person,
+              text: "Profile",
+              index: 4,
+              showCondition: checkIndex,
+              tapHandler: tapHandler,
+              wrapKey: keys[4],
+              indicatorUpdater: updateIndicator,
             ),
           ],
         ),
