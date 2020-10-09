@@ -8,7 +8,6 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-
   List<ColorScreen> screens = [
     ColorScreen(Colors.amber),
     ColorScreen(Colors.blue),
@@ -18,7 +17,7 @@ class _HomeState extends State<Home> {
   ];
   int _currentScreen = 0;
 
-  void changeScreenHandler(index){
+  void changeScreenHandler(index) {
     setState(() {
       _currentScreen = index;
     });
@@ -31,5 +30,4 @@ class _HomeState extends State<Home> {
       bottomNavigationBar: BottomNavBar(changeScreen: changeScreenHandler),
     );
   }
-
 }

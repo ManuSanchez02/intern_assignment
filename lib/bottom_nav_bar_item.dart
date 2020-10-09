@@ -16,8 +16,7 @@ class BottomNavBarItem extends StatelessWidget {
       this.showCondition,
       this.tapHandler,
       this.wrapKey,
-        this.indicatorUpdater
-      });
+      this.indicatorUpdater});
 
   @override
   Widget build(BuildContext context) {

@@ -73,12 +73,6 @@ class _BottomNavBarState extends State<BottomNavBar> {
 
   @override
   Widget build(BuildContext context) {
-    WidgetsBinding.instance.addPostFrameCallback((_) => {
-          _indicatorPosition = getPosition(keys[_currentIndex]).dx - 8,
-          _indicatorWidth = getSize(keys[_currentIndex]).width + 16,
-          _indicatorHeight = getSize(keys[_currentIndex]).height + 22,
-        });
-
     return Container(
       height: kBottomNavigationBarHeight,
       alignment: Alignment.center,
